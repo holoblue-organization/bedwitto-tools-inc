@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopkeeper Generator | Bedwitto Tools Inc.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #292F36;
+            --light: #F7FFF7;
+        }
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: var(--primary);
+            text-shadow: 2px 2px 0 var(--dark);
+            font-size: 2.5rem;
+        }
+        
+        .generator-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 5px 5px 0 var(--dark);
+            border: 3px solid var(--dark);
+            margin-top: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--dark);
+            border-radius: 50px;
+            font-family: 'Comic Neue', cursive;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid var(--dark);
+            box-shadow: 3px 3px 0 var(--dark);
+            transition: all 0.2s;
+            font-family: 'Comic Neue', cursive;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 5px 5px 0 var(--dark);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: 2px 2px 0 var(--dark);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .preview-area {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .preview-box {
+            text-align: center;
+            background: var(--accent);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid var(--dark);
+            box-shadow: 3px 3px 0 var(--dark);
+        }
+        
+        .preview-box h3 {
+            margin-top: 0;
+        }
+        
+        .skin-preview {
+            width: 128px;
+            height: 128px;
+            image-rendering: pixelated;
+            border: 3px solid var(--dark);
+            background: #fff;
+        }
+        
+        #villager-preview {
+            width: 64px;
+            height: 64px;
+            image-rendering: pixelated;
+            border: 3px solid var(--dark);
+            background: #fff;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 5px solid var(--secondary);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #download-btn {
+            display: none;
+            margin: 20px auto;
+        }
+        
+        .instructions {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid var(--dark);
+            box-shadow: 3px 3px 0 var(--dark);
+            margin-top: 30px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        /* Animation for fun */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .btn-primary:hover {
+            animation: bounce 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shopkeeper Skin Generator</h1>
+        <p>Turn any Minecraft player into a BedWars shopkeeper!</p>
+        
+        <div class="generator-box">
+            <div class="input-group">
+                <input type="text" id="username-input" placeholder="Enter Minecraft username">
+                <button id="generate-btn" class="btn btn-primary">Generate!</button>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Working our magic...</p>
+            </div>
+            
+            <div class="preview-area">
+                <div class="preview-box">
+                    <h3>Original Skin</h3>
+                    <img id="skin-preview" class="skin-preview" src="https://visage.surgeplay.com/bust/128/Steve">
+                </div>
+                
+                <div class="preview-box">
+                    <h3>Shopkeeper Preview</h3>
+                    <img id="villager-preview" src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Villager_Key_Art_600x300.jpg">
+                </div>
+            </div>
+            
+            <button id="download-btn" class="btn">Download Resource Pack</button>
+        </div>
+        
+        <div class="instructions">
+            <h3>How to Use:</h3>
+            <ol>
+                <li>Enter any Minecraft username</li>
+                <li>Click "Generate" to preview</li>
+                <li>Download the resource pack</li>
+                <li>Place the ZIP file in your Minecraft resource packs folder</li>
+                <li>Enjoy your custom shopkeepers!</li>
+            </ol>
+            
+            <h3>Pro Tip:</h3>
+            <p>Try famous YouTubers' names like "Technoblade" or "Dream" for fun results!</p>
+        </div>
+    </div>
+
+    <!-- Include the JavaScript file -->
+    <script src="js/shopkeeper-gen.js"></script>
+    
+    <!-- Simple analytics for fun -->
+    <script>
+        // Basic usage tracking
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('bedwitto_visited')) {
+                console.log('Welcome back to Bedwitto Tools Inc.!');
+            } else {
+                localStorage.setItem('bedwitto_visited', 'true');
+                console.log('Thanks for using Bedwitto Tools Inc.!');
+            }
+        });
+    </script>
+</body>
+</html>
