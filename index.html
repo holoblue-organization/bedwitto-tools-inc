@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedwitto Tools Inc. | Hypixel BedWars Utilities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #292F36;
+            --light: #F7FFF7;
+        }
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 3rem;
+            color: white;
+            text-shadow: 3px 3px 0 var(--dark);
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 5px 5px 0 var(--dark);
+            border: 3px solid var(--dark);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 8px 8px 0 var(--dark);
+        }
+        
+        .tool-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+        
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--dark);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid var(--dark);
+            box-shadow: 3px 3px 0 var(--dark);
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 5px 5px 0 var(--dark);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bedwitto Tools Inc.</h1>
+            <div class="subtitle">Your silly-but-serious BedWars utilities!</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="tools-grid">
+            <a href="tools/shopkeeper-generator.html" class="tool-card">
+                <div class="tool-icon">👨‍🌾</div>
+                <h3>Shopkeeper Skin Generator</h3>
+                <p>Turn any player into a BedWars shopkeeper!</p>
+            </a>
+            
+            <a href="tools/resource-timings.html" class="tool-card">
+                <div class="tool-icon">⏱️</div>
+                <h3>Resource Timings</h3>
+                <p>Never miss an emerald spawn again!</p>
+            </a>
+            
+            <a href="tools/quick-buy.html" class="tool-card">
+                <div class="tool-icon">🛒</div>
+                <h3>Quick Buy Guide</h3>
+                <p>Learn all the secret shop shortcuts!</p>
+            </a>
+            
+            <a href="tools/defense-builder.html" class="tool-card">
+                <div class="tool-icon">🛡️</div>
+                <h3>Defense Builder</h3>
+                <p>Plan the perfect bed defense!</p>
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Made with ♥ for the Hypixel BedWars community</p>
+            <p>Not affiliated with Hypixel or Mojang</p>
+        </div>
+    </footer>
+</body>
+</html>
